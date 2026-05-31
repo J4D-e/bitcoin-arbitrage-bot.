@@ -1,0 +1,99 @@
+/* styles/global.css */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&family=Bebas+Neue&display=swap');
+
+:root {
+  /* ── Paleta ────────────────────────────────── */
+  --bg-base:        #060b12;
+  --bg-panel:       #0a1220;
+  --bg-panel-alt:   #0d1828;
+  --bg-hover:       #121f30;
+  --border:         #1a2d42;
+  --border-bright:  #234060;
+
+  --text-primary:   #e2eaf4;
+  --text-secondary: #6b8aab;
+  --text-dim:       #3d5a78;
+
+  --green:          #00d395;
+  --green-dim:      #00d39520;
+  --green-glow:     0 0 12px #00d39566;
+
+  --red:            #ff3b6b;
+  --red-dim:        #ff3b6b20;
+
+  --amber:          #f59e0b;
+  --amber-dim:      #f59e0b20;
+
+  --binance:        #F0B90B;
+  --kraken:         #8B78F7;
+  --coinbase:       #4D8BFF;
+
+  --font-mono:      'IBM Plex Mono', monospace;
+  --font-display:   'Bebas Neue', sans-serif;
+
+  /* ── Efectos ───────────────────────────────── */
+  --scanline-opacity: 0.025;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body, #root {
+  height: 100%;
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+/* Scanlines overlay */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0, var(--scanline-opacity)) 2px,
+    rgba(0,0,0, var(--scanline-opacity)) 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* Scrollbar custom */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: var(--bg-panel); }
+::-webkit-scrollbar-thumb { background: var(--border-bright); border-radius: 2px; }
+
+/* Animaciones */
+@keyframes pulse-green {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+@keyframes flash-bid {
+  0% { background: var(--green-dim); }
+  100% { background: transparent; }
+}
+
+@keyframes flash-ask {
+  0% { background: var(--red-dim); }
+  100% { background: transparent; }
+}
+
+@keyframes slide-in {
+  from { opacity: 0; transform: translateX(-8px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes blink-cursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.flash-bid { animation: flash-bid 0.6s ease-out; }
+.flash-ask { animation: flash-ask 0.6s ease-out; }
+.slide-in  { animation: slide-in 0.25s ease-out; }
